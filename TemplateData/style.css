@@ -1,6 +1,6 @@
-body { padding: 0; margin: 0 }
+body { padding: 0; margin: 0; overflow: hidden; background-color: #000;}
 #unity-container { position: absolute }
-#unity-container.unity-desktop { left: 50%; top: 50%; transform: translate(-50%, -50%) }
+#unity-container.unity-desktop { left: 50%; top: 50%; transform: translate(-50%, -50%)}
 #unity-container.unity-mobile { position: fixed; width: 100%; height: 100% }
 #unity-canvas { background: #231F20 }
 .unity-mobile #unity-canvas { width: 100%; height: 100% }
@@ -12,5 +12,74 @@ body { padding: 0; margin: 0 }
 .unity-mobile #unity-footer { display: none }
 #unity-logo-title-footer { float:left; width: 102px; height: 38px; background: url('unity-logo-title-footer.png') no-repeat center }
 #unity-build-title { float: right; margin-right: 10px; line-height: 38px; font-family: arial; font-size: 18px }
-#unity-fullscreen-button { cursor:pointer; float: right; width: 38px; height: 38px; background: url('fullscreen-button.png') no-repeat center }
+#unity-fullscreen-button {
+    cursor: pointer;
+    width: 38px;
+    height: 38px;
+    background: url(fullscreen-button.png) no-repeat center;
+    position: absolute;
+    left: 0;
+    bottom: 4px;
+}
 #unity-warning { position: absolute; left: 50%; top: 5%; transform: translate(-50%); background: white; padding: 10px; display: none }
+.barreira {
+    position: fixed;
+    z-index: 10000000;
+    background-color: #000;
+    width: 100%;
+    height: 100%;
+    color: white;
+    top: 0;
+    left: 0;
+    font-size: 20px;
+}
+
+@keyframes rotacionar90 {
+    /* 0% a 66.66%: Rotação de 0 para 90 graus (2 segundos de movimento) */
+    0% { 
+        transform: rotate(0deg); 
+    }
+    
+    66.66% { 
+        transform: rotate(90deg); 
+    }
+    
+    /* 66.66% a 100%: Pausa de 1 segundo mantendo 90 graus */
+    100% { 
+        transform: rotate(90deg); 
+    }
+}
+.barreira-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  max-width: 300px;
+  height: 200px;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  font-optical-sizing: auto;
+    img {
+        width: 100px;
+        height: auto;
+        animation: rotacionar90 2s ease-in-out infinite;
+
+    }
+    
+
+}
+
+@media only screen and (orientation: portrait){
+    .barreira {
+        display: block;
+    }
+}
+@media only screen and (orientation: landscape){
+    .barreira {
+        display: none;
+    }
+}
