@@ -9,7 +9,7 @@ body { padding: 0; margin: 0; overflow: hidden; background-color: #000;}
 #unity-progress-bar-empty { width: 141px; height: 18px; margin-top: 10px; margin-left: 6.5px; background: url('progress-bar-empty-dark.png') no-repeat center }
 #unity-progress-bar-full { width: 0%; height: 18px; margin-top: 10px; background: url('progress-bar-full-dark.png') no-repeat center }
 #unity-footer { position: relative }
-.unity-mobile #unity-footer { display: none }
+
 #unity-logo-title-footer { float:left; width: 102px; height: 38px; background: url('unity-logo-title-footer.png') no-repeat center }
 #unity-build-title { float: right; margin-right: 10px; line-height: 38px; font-family: arial; font-size: 18px }
 #unity-fullscreen-button {
@@ -33,7 +33,18 @@ body { padding: 0; margin: 0; overflow: hidden; background-color: #000;}
     left: 0;
     font-size: 20px;
 }
-
+@media only screen and (max-width: 991px) and (orientation: landscape){
+.unity-mobile #unity-footer {position: relative; top: -50px; display: block !important;}
+#unity-fullscreen-button {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    background: url(fullscreen-button.png) center / 50px auto no-repeat;
+    position: absolute;
+    left: 0;
+    bottom: -50px;
+}
+}
 @keyframes rotacionar90 {
     /* 0% a 66.66%: Rotação de 0 para 90 graus (2 segundos de movimento) */
     0% { 
