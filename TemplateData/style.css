@@ -1,27 +1,65 @@
-body { padding: 0; margin: 0; overflow: hidden; background-color: #000;}
-#unity-container { position: absolute }
-#unity-container.unity-desktop { left: 50%; top: 50%; transform: translate(-50%, -50%)}
-#unity-container.unity-mobile { position: fixed; width: 100%; height: 100% }
-#unity-canvas { background: #231F20 }
-.unity-mobile #unity-canvas { width: 100%; height: 100% }
-#unity-loading-bar { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: none }
+body { 
+    padding: 0; 
+    margin: 0; 
+    overflow: hidden; 
+    background-color: #000;
+}
+
+#unity-container { 
+    position: absolute; 
+    width: 100% !important; 
+    height: 100% !important; 
+    top: 0; 
+    left: 0; 
+}
+
+/* CORREÇÃO PRINCIPAL: Desktop agora ocupa 100% em vez de ficar centralizado pequeno */
+#unity-container.unity-desktop { 
+    width: 100% !important; 
+    height: 100% !important; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: none; /* Remove a centralização que encolhia o jogo */
+}
+
+#unity-container.unity-mobile { 
+    position: fixed; 
+    width: 100%; 
+    height: 100%; 
+}
+
+#unity-canvas { 
+    background: #231F20; 
+    width: 100% !important; /* Força o canvas a esticar sempre */
+    height: 100% !important; 
+    display: block;
+}
+
+.unity-mobile #unity-canvas { 
+    width: 100%; 
+    height: 100%; 
+}
+
+/* Mantém a barra de loading no meio, mas sem afetar o tamanho do jogo */
+#unity-loading-bar { 
+    position: absolute; 
+    left: 50%; 
+    top: 50%; 
+    transform: translate(-50%, -50%); 
+    display: none; 
+}
+
 #unity-logo { width: 154px; height: 130px; background: url('unity-logo-dark.png') no-repeat center }
 #unity-progress-bar-empty { width: 141px; height: 18px; margin-top: 10px; margin-left: 6.5px; background: url('progress-bar-empty-dark.png') no-repeat center }
 #unity-progress-bar-full { width: 0%; height: 18px; margin-top: 10px; background: url('progress-bar-full-dark.png') no-repeat center }
-#unity-footer { position: relative }
 
-#unity-logo-title-footer { float:left; width: 102px; height: 38px; background: url('unity-logo-title-footer.png') no-repeat center }
-#unity-build-title { float: right; margin-right: 10px; line-height: 38px; font-family: arial; font-size: 18px }
-#unity-fullscreen-button {
-    cursor: pointer;
-    width: 38px;
-    height: 38px;
-    background: url(fullscreen-button.png) no-repeat center;
-    position: absolute;
-    left: 0;
-    bottom: 4px;
-}
+/* Esconde o rodapé padrão da Unity para ficar "Full Game" limpo */
+#unity-footer { display: none !important; }
+
 #unity-warning { position: absolute; left: 50%; top: 5%; transform: translate(-50%); background: white; padding: 10px; display: none }
+
+/* --- BARREIRA (Pedir para virar o celular) --- */
 .barreira {
     position: fixed;
     z-index: 10000000;
@@ -33,33 +71,13 @@ body { padding: 0; margin: 0; overflow: hidden; background-color: #000;}
     left: 0;
     font-size: 20px;
 }
-@media only screen and (max-width: 991px) and (orientation: landscape){
-.unity-mobile #unity-footer {position: relative; top: -50px; display: block !important;}
-#unity-fullscreen-button {
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
-    background: url(fullscreen-button.png) center / 50px auto no-repeat;
-    position: absolute;
-    left: 0;
-    bottom: -50px;
-}
-}
+
 @keyframes rotacionar90 {
-    /* 0% a 66.66%: Rotação de 0 para 90 graus (2 segundos de movimento) */
-    0% { 
-        transform: rotate(0deg); 
-    }
-    
-    66.66% { 
-        transform: rotate(90deg); 
-    }
-    
-    /* 66.66% a 100%: Pausa de 1 segundo mantendo 90 graus */
-    100% { 
-        transform: rotate(90deg); 
-    }
+    0% { transform: rotate(0deg); }
+    66.66% { transform: rotate(90deg); }
+    100% { transform: rotate(90deg); }
 }
+
 .barreira-content {
   position: absolute;
   top: 0;
@@ -73,24 +91,16 @@ body { padding: 0; margin: 0; overflow: hidden; background-color: #000;}
   font-family: "Roboto", sans-serif;
   font-weight: 900;
   font-style: normal;
-  font-optical-sizing: auto;
-    img {
+  img {
         width: 100px;
         height: auto;
         animation: rotacionar90 2s ease-in-out infinite;
-
     }
-    
-
 }
 
 @media only screen and (orientation: portrait){
-    .barreira {
-        display: block;
-    }
+    .barreira { display: block; }
 }
 @media only screen and (orientation: landscape){
-    .barreira {
-        display: none;
-    }
+    .barreira { display: none; }
 }
